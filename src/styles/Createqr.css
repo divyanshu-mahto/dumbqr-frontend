@@ -1,0 +1,136 @@
+.outer-container-edit{
+    width: 70vi;
+    border-radius: 20px;
+    background: rgba(153, 229, 96, 0.66);
+    max-width: 792px;
+    padding: 25px 40px;
+    align-items: center;
+}
+.qr-appearance{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+.qr-settings{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    flex: 1 0 0;
+}
+
+.settings-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    align-self: stretch;
+}
+.qr-action-buttons-conatiner{
+    display: none;
+}
+.create-button-container-large{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 69px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+.create-button-large{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background: #fff;
+    box-shadow: 1px 2px 0px 0px #000;
+    color: #000;
+    text-align: center;
+    font-family: "Basier Square Mono";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}
+.create-button-large:hover{
+    transform: translate(1px, 2px);
+    box-shadow: none;
+}
+.input-field-2{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    align-self: stretch;
+}
+.input-2-label{
+    color: #000;
+    text-align: center;
+    font-family: "Basier Square Mono";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.input-2-box{
+    appearance: none;
+    height: 31px;
+    flex: 1 0 0;
+    border: 1px solid #000;
+    padding: 0px;
+    background: none;
+    border-radius: 6px;
+}
+
+
+@media screen and (max-width: 950px) and (min-width: 750px){
+    .settings-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+        align-self: stretch;
+    }
+    .create-button-container-large{
+        display: none;
+    }
+    .qr-action-buttons-conatiner{
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        gap: 69px;
+        align-self: stretch;
+    }
+    .input-field-2{
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 750px){
+    .settings-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+        align-self: stretch;
+    }
+    .create-button-container-large{
+        display: none;
+    }
+    .qr-action-buttons-conatiner{
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        gap: 69px;
+        align-self: stretch;
+    }
+    .input-field-2{
+        gap: 14px;
+    }
+}

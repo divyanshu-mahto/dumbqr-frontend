@@ -1,0 +1,123 @@
+.container{
+    background: #f6f6f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box; 
+}
+
+.auth-container{
+    display: flex;
+    width: 75vi;
+    max-width: 400px;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 60px;
+}
+.auth-heading{
+    color: #000;
+    font-family: "Instrument Sans";
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.input-fields{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+}
+.input-field{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
+}
+.input-label{
+    align-self: stretch;
+    color: #000;
+    font-family: "Basier Square Mono";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.input-box{
+    display: flex;
+    padding: 8px 10px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border: 1px solid #000;
+    color: rgba(0, 0, 0, 0.80);
+    font-family: "Basier Square Mono";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.input-box::placeholder{
+    flex: 1 0 0;
+    color: rgba(0, 0, 0, 0.50);
+    font-family: "Basier Square Mono";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.submit-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.submit-button{
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background: rgba(153, 229, 96, 0.66);
+    box-shadow: 1px 2px 0px 0px #000;
+    color: #000;
+    text-align: center;
+    font-family: "Basier Square Mono";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.submit-button:hover{
+    transform: translate(1px, 2px);
+    box-shadow: none;
+}
+.already-have{
+    color: #000;
+    text-align: center;
+    font-family: "Basier Square Mono";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.login-link{
+    color: #000;
+    text-align: center;
+    font-family: "Basier Square Mono";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+}

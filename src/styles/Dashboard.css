@@ -1,0 +1,623 @@
+html{
+    background: #fff;
+}
+.dashboard-container{
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh; 
+    padding: 0px;
+    box-sizing: border-box; 
+    margin-top: 100px;
+    position: relative;
+}
+.qr-codes-outer-container{
+    display: flex;
+    width: 70vi;
+    max-width: 792px;
+    padding: 25px 40px;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background: rgba(153, 229, 96, 0.66);
+}
+.heading{
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    /* position: fixed; */
+    height: 60px;
+    padding-bottom: 20px;
+}
+.qr-codes-heading{
+    color: #000;
+    text-align: center;
+    font-family: "Basier Square Mono";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.new-qr-button{
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background: #fff;
+    box-shadow: 1px 2px 0px 0px #000;
+    color: #000;
+    text-align: center;
+    font-family: "Basier Square Mono";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}
+.new-qr-button:hover{
+    transform: translate(1px, 2px);
+    box-shadow: none;
+}
+.qr-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 752px;
+    margin-top: 0px;
+}
+.qr-card{
+    display: flex;
+    width: 100%;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    border: 1px solid #000;
+    flex-wrap: wrap;
+    background: #FFF;
+}
+.qr-card-left{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1 0 0;
+}
+.qr-image{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.qr-image img {
+    width: 100px; 
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px; 
+}
+.qr-details-dashboard{
+    display: flex;
+    padding-right: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    flex: 1 0 0;
+}
+.qr-name{
+    align-self: stretch;
+    color: #000;
+    font-family: "Basier Square Mono";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.qr-info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+}
+.qr-redirect{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+}
+.redirect-heading{
+    color: #000;
+    font-family: "Basier Square Mono";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.redirect-url{
+    color: #3A8500;
+    font-family: "Basier Square Mono";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    flex: 1 0 0;
+    word-break: break-word;
+}
+.qr-scans-count{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+}
+.scans-count-heading{
+    color: #000;
+    font-family: "Basier Square Mono";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.scan-count{
+    color: #000;
+    font-family: "Basier Square Mono";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.qr-action-buttons{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.qr-action-button-analytics{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: "Basier Square Mono";
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background: #B9EB93;
+    box-shadow: 1px 2px 0px 0px #000;
+}
+.qr-action-button-analytics:hover{
+    transform: translate(1px, 2px);
+    box-shadow: none;
+}
+.qr-action-button-edit{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #000;
+    font-family: "Basier Square Mono";
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 1px 2px 0px 0px #000;
+}
+.qr-action-button-edit:hover{
+    transform: translate(1px, 2px);
+    box-shadow: none;
+}
+.no-qr-found{
+    color: #000;
+    font-family: "Basier Square Mono";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #63dd80; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+
+@media screen and (max-width: 950px){
+    .dashboard-container{
+        margin-top: 100px;
+    }
+    .heading{
+        display: flex;
+        width: 100%;
+        padding: 0px 20px;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 872px;
+        /* position: fixed; */
+        height: 50px;
+    }
+    .qr-codes-outer-container{
+        width: 72vi;
+        max-width: 712px;
+    }
+    .qr-codes-heading{
+        color: #000;
+        text-align: center;
+        font-family: "Basier Square Mono";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .new-qr-button{
+        display: flex;
+        padding: 10px 20px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 10px;
+        border: 1px solid #000;
+        background: #fff;
+        box-shadow: 1px 2px 0px 0px #000;
+        color: #000;
+        text-align: center;
+        font-family: "Basier Square Mono";
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        cursor: pointer;
+    }
+    .new-qr-button:hover{
+        transform: translate(1px, 2px);
+        box-shadow: none;
+    }
+    .qr-container{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        max-width: 872px;
+        margin-top: 20px;
+    }
+    .qr-card{
+        display: flex;
+        width: 100%;
+        padding: 14px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 16px;
+        border: 1px solid #000;
+        flex-wrap: wrap;
+    }
+    .qr-card-left{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1 0 0;
+    }
+    .qr-image{
+        display: flex;
+        width: 100px;
+        height: 100px;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .qr-image img {
+        width: 90px; 
+        height: 90px; 
+        object-fit: cover; 
+        object-position: center; 
+        border-radius: 8px; 
+    }
+    .qr-details-dashboard{
+        display: flex;
+        padding-right: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 11px;
+        flex: 1 0 0;
+    }
+    .qr-name{
+        align-self: stretch;
+        color: #000;
+        font-family: "Basier Square Mono";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .qr-info{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        align-self: stretch;
+    }
+    .qr-redirect{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        align-self: stretch;
+    }
+    .redirect-heading{
+        color: #000;
+        font-family: "Basier Square Mono";
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .redirect-url{
+        font-family: "Basier Square Mono";
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        flex: 1 0 0;
+        word-break: break-word;
+    }
+    .qr-scans-count{
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        align-self: stretch;
+    }
+    .scans-count-heading{
+        color: #000;
+        font-family: "Basier Square Mono";
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .scan-count{
+        color: #000;
+        font-family: "Basier Square Mono";
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .qr-action-buttons{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .qr-action-button-analytics{
+        display: flex;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #000;
+        font-family: "Basier Square Mono";
+        cursor: pointer;
+        background: #BDFFAE;
+        font-size: 13px;
+    }
+    .qr-action-button-edit{
+        display: flex;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #000;
+        font-family: "Basier Square Mono";
+        cursor: pointer;
+        font-size: 13px;
+    }
+}
+
+
+@media screen and (max-width: 650px){
+    .dashboard-container{
+        margin-top: 100px;
+    }
+    .qr-codes-outer-container{
+        width: 70vi;
+        padding: 25px 30px;
+    }
+    .heading{
+        display: flex;
+        width: 100%;
+        padding: 0px 20px;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 812px;
+        height: 50px;
+    }
+    .qr-codes-heading{
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+    }
+    .new-qr-button{
+        display: flex;
+        padding: 10px 20px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 10px;
+        border: 1px solid #000;
+        background: #fff;
+        box-shadow: 1px 2px 0px 0px #000;
+        color: #000;
+        text-align: center;
+        font-family: "Basier Square Mono";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        cursor: pointer;
+    }
+    .new-qr-button:hover{
+        transform: translate(1px, 2px);
+        box-shadow: none;
+    }
+    .qr-container{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        max-width: 812px;
+        margin-top: 20px;
+    }
+    .qr-card{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        padding: 14px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 16px;
+        border: 1px solid #000;
+    }
+    .qr-card-left{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1 0 0;
+    }
+    .qr-image{
+        display: flex;
+        width: 80px;
+        height: 80px;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .qr-image img {
+        width: 80px; 
+        height: 80px; 
+        object-fit: cover; 
+        object-position: center; 
+        border-radius: 8px;
+    }
+    .qr-details-dashboard{
+        display: flex;
+        padding-right: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        flex: 1 0 0;
+    }
+    .qr-name{
+        align-self: stretch;
+        color: #000;
+        font-family: "Basier Square Mono";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .qr-info{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        align-self: stretch;
+    }
+    .qr-redirect{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        align-self: stretch;
+    }
+    .redirect-heading{
+        color: #000;
+        font-family: "Basier Square Mono";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .redirect-url{
+        font-family: "Basier Square Mono";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        flex: 1 0 0;
+        word-break: break-word;
+    }
+    .qr-scans-count{
+        display: flex;
+        align-items: flex-start;
+        gap: 2px;
+        align-self: stretch;
+    }
+    .scans-count-heading{
+        color: #000;
+        font-family: "Basier Square Mono";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .scan-count{
+        color: #000;
+        font-family: "Basier Square Mono";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .qr-action-buttons{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .qr-action-button-analytics{
+        display: flex;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #000;
+        font-family: "Basier Square Mono";
+        cursor: pointer;
+        background: #BDFFAE;
+        font-size: 10px;
+
+    }
+    .qr-action-button-edit{
+        display: flex;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #000;
+        font-family: "Basier Square Mono";
+        cursor: pointer;
+        font-size: 10px;
+    }
+}

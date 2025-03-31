@@ -1,0 +1,16 @@
+@font-face {
+    font-family: "Basier Square Mono";
+    src: url('/fonts/basiersquaremono-regular-webfont.eot') format('eot'),
+        url('/fonts/basiersquaremono-regular-webfont.woff') format('woff2'),
+        url('/fonts/basiersquaremono-regular-webfont.woff2') format('woff2'),
+        url('/fonts/basiersquaremono-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Instrument Sans";
+    src: url('/fonts/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype-variations');
+    font-display: swap;
+}
