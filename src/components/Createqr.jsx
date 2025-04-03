@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 
 
-const CreateQrCard = React.memo(({ name, redirectUrl, shortId, qrcode, foreground, background, onNameChange, onShortIdChange, onRedirectUrlChange, onForegroundChange, onBackgroundChange, onSubmit }) => {
+const CreateQrCard = React.memo(({ name, redirectUrl, shortId, qrcode, foreground, background, onNameChange, onShortIdChange, onRedirectUrlChange, onForegroundChange, onBackgroundChange, onSubmit, loading }) => {
 
     const imageSrc = `data:image/png;base64,${qrcode}`;
 
@@ -69,12 +69,16 @@ const CreateQrCard = React.memo(({ name, redirectUrl, shortId, qrcode, foregroun
                         <input className="input-2-box" type="color" value={background} onChange={onBackgroundChange}></input>
                     </div>
                     <div className="create-button-container-large">
-                        <button className="create-button-large" onClick={onSubmit}>Create QR Code</button>
+                        <button className="create-button-large" onClick={onSubmit} disabled={loading}>
+                            {loading ? "Creating..." : "Create QR Code"}
+                        </button>
                     </div>
                 </div>
             </div>
             <div className="qr-action-buttons-conatiner">
-                <div className="save-changes-button" onClick={onSubmit}>Create QR Code</div>
+                <button className="save-changes-button" onClick={onSubmit} disabled={loading}>
+                    {loading ? "Creating..." : "Create QR Code"}
+                </button>
             </div>
         </div>
     )
@@ -88,6 +92,7 @@ const Createqr = () => {
     const [foreground, setForeground] = useState("#000000");
     const [background, setBackground] = useState("#FFFFFF");
     const [qrcode, setQrcode] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -105,6 +110,7 @@ const Createqr = () => {
         }
 
         const token = Cookies.get("token");
+
 
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/api/qrimage`, {
@@ -145,8 +151,9 @@ const Createqr = () => {
             };
 
         } catch (error) {
-            // console.error("QR code image generation failed: ", error);
-        }
+            navigate("/dashboard");
+            toast.error("Error creating QR code, please try again later");
+        } 
     }, [shortId, foreground, background])
 
 
@@ -179,11 +186,11 @@ const Createqr = () => {
         if (name == "" || shortId == "" || redirectUrl == "") {
             toast.error("All fields are required");
         }
-        if (`${import.meta.env.VITE_API_URL}/${shortId}` == redirectUrl){
+        else if (`${import.meta.env.VITE_API_URL}/${shortId}` == redirectUrl){
             toast.error("Short URL cannot be same as redirect URL");
         }
         else {
-
+            setLoading(true);
             const token = Cookies.get("token");
 
             try {
@@ -211,7 +218,8 @@ const Createqr = () => {
                     } else if (response.status === 406) {
                         toast.error("Short URL is already taken. Choose some other short URL");
                     } else if (response.status === 400) {
-                        toast.error("Short URL contains a reserved keyword \nChoose some other short URL")
+                        if(responseData == "ShortURL or RedirectURL empty") toast.error("Short URL or Redirect URL cannot be empty");
+                        else toast.error("Short URL contains a reserved keyword \nChoose some other short URL")
                     } else if (response.status === 429) {
                         toast.error("Too many requests, please try again later");
                     } else if (response.status === 500) {
@@ -225,7 +233,9 @@ const Createqr = () => {
 
 
             } catch (error) {
-                // console.error("QR code creation failed: ", error);
+                toast.error("Error creating QR code, please try again later");
+            } finally{
+                setLoading(false);
             }
         }
     }
@@ -284,6 +294,7 @@ const Createqr = () => {
                             onForegroundChange={handleForegroundChange}
                             onBackgroundChange={handleBackgroundChange}
                             onSubmit={handleSubmit}
+                            loading={loading}
                         />
                     </div>
 

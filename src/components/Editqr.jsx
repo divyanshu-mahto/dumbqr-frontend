@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 
 
-const EditQrCard = React.memo(({ qr, qrname, redirectUrl, onQrnameChange, onRedirectUrlChange, onDeleteQr, onSaveChanges, onDownloadQr, onAnalytics }) => {
+const EditQrCard = React.memo(({ qr, qrname, redirectUrl, onQrnameChange, onRedirectUrlChange, onDeleteQr, onSaveChanges, onDownloadQr, onAnalytics, saveLoading, deleteLoading }) => {
 
     const imageSrc = `data:image/png;base64,${qr.qrcode}`;
 
@@ -62,8 +62,12 @@ const EditQrCard = React.memo(({ qr, qrname, redirectUrl, onQrnameChange, onRedi
                 </div>
             </div>
             <div className="edit-qr-action-buttons-conatiner">
-                <button className="delete-qr-button" onClick={onDeleteQr}>Delete QR</button>
-                <button className="save-changes-button" onClick={onSaveChanges}>Save changes</button>
+                <button className="delete-qr-button" onClick={onDeleteQr} disabled={deleteLoading}>
+                    {deleteLoading ? "Deleting..." : "Delete"}
+                </button>
+                <button className="save-changes-button" onClick={onSaveChanges} disabled={saveLoading}>
+                    {saveLoading ? "Saving..." : "Save Changes"}
+                </button>
             </div>
         </div>
     )
@@ -78,6 +82,8 @@ const Editqr = () => {
     const [redirectUrl, setRedirectUrl] = useState("");
     const [shortId, setShortId] = useState("");
     const [qr, setQr] = useState(null);
+    const [saveLoading, setSaveLoading] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false);
 
     //scroll to top
     const location = useLocation();
@@ -141,7 +147,7 @@ const Editqr = () => {
             toast.error("Short URL cannot be same as redirect URL");
         }
         else {
-
+            setSaveLoading(true);
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/qr/update/${shortId}`, {
                     method: "POST",
@@ -179,7 +185,8 @@ const Editqr = () => {
 
 
             } catch (error) {
-                // console.error("QR code updation failed: ", error);
+            } finally{
+                setSaveLoading(false);
             }
         }
     };
@@ -188,6 +195,8 @@ const Editqr = () => {
     const handleDeleteQr = async (e) => {
 
         const token = Cookies.get("token");
+
+        setDeleteLoading(true);
 
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/api/qr/${shortId}`, {
@@ -225,7 +234,9 @@ const Editqr = () => {
 
 
         } catch (error) {
-            // console.error("QR code deletion failed: ", error);
+            toast.error("Can't delete QR code, try again later");
+        } finally{
+            setDeleteLoading(false);
         }
     }
 
@@ -270,6 +281,8 @@ const Editqr = () => {
                             onSaveChanges={handleSaveChanges}
                             onDownloadQr={handleDownloadQr}
                             onAnalytics={handleAnalytics}
+                            saveLoading={saveLoading}
+                            deleteLoading={deleteLoading}
                         />
                     </div>
 

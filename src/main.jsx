@@ -11,7 +11,6 @@ import Editqr from './components/Editqr.jsx'
 import Createqr from './components/Createqr.jsx'
 import Analytics from './components/Analytics.jsx'
 import Layout from './components/Layout.jsx'
-import Home from './components/Home.jsx'
 import Verifycode from './components/Verifycode.jsx'
 import ForgotPassword from './components/ForgotPassword.jsx'
 import ForgotPasswordUpdate from './components/ForgotPasswordUpdate.jsx'
@@ -26,12 +25,19 @@ const router = createBrowserRouter([
         <App />
       </Layout>
     ),
-    // errorElement: <NotFoundErrorPage />
     errorElement: (
       <Layout>
         <NotFoundErrorPage />
       </Layout>
     )
+  },
+  {
+    path: '/404',
+    element: (
+      <Layout>
+        <NotFoundErrorPage />
+      </Layout>
+    ),
   },
   {
     path: '/signup',
