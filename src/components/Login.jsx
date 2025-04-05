@@ -95,8 +95,6 @@ const Login = () => {
             } catch (error) {
                 if (error.message === "Failed to fetch") {
                     toast.error("Failed to connect to the server. Please try again later");
-                } else{
-                    toast.error("Something went wrong on the server. Please try again later")
                 }
             } finally {
                 setLoading(false);
@@ -119,7 +117,7 @@ const Login = () => {
                         </div>
                         <div className="input-field">
                             <div className="input-label">Password</div>
-                            <input type="password" className="input-box" placeholder="strong password" onChange={(e) => setPassword(e.target.value)} disabled={loading}></input>
+                            <input type="password" className="input-box" placeholder="your password" onChange={(e) => setPassword(e.target.value)} disabled={loading}></input>
                         </div>
 
                     </div>

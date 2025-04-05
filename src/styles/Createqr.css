@@ -110,6 +110,14 @@
     .input-field-2{
         gap: 30px;
     }
+    .outer-container-edit{
+        width: 70vi;
+        border-radius: 20px;
+        background: rgba(153, 229, 96, 0.66);
+        max-width: 792px;
+        padding: 25px 40px;
+        align-items: center;
+    }
 }
 
 @media screen and (max-width: 750px){
@@ -132,5 +140,13 @@
     }
     .input-field-2{
         gap: 14px;
+    }
+    .outer-container-edit{
+        width: 80vi;
+        border-radius: 20px;
+        background: rgba(153, 229, 96, 0.66);
+        max-width: 792px;
+        padding: 25px 16px;
+        align-items: center;
     }
 }

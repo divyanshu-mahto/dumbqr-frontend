@@ -18,11 +18,11 @@ const Home = () => {
                 <Navbar2 />
 
                 <div className="container-1">
-                    <div className="heading-1">QR code that’s ‘Dumb’<br />until you need it</div>
+                    <div className="heading-1">Get smart dynamic QR codes <br/>So easy, it feels ‘Dumb’</div>
                     <div className="subheading-1">Flexible, Trackable, and Easy to Update!</div>
                     <Link to={"/signup"} className="start-button">Start for free</Link>
                     <div className="qr-images">
-                        <img src={display_qr_code} height={220} />
+                        <img src={display_qr_code} height={180} />
                     </div>
                     <div className="subheading-2">Create QR codes that evolve with your needs. Change links anytime, track scans, and never reprint a QR code again.</div>
                 </div>
@@ -42,7 +42,9 @@ const Home = () => {
                             <div className="feature-content">Optimized for quick scans and secure redirections.</div>
                         </div>
                     </div>
-                    <div className="demo-gif"></div>
+                    <div className="demo-video">
+                        <iframe src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" ></iframe>
+                    </div>
                 </div>
                 <div className="footer">
                     <div className="footer-elements">

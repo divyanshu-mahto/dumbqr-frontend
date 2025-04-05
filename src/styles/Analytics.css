@@ -318,8 +318,8 @@
 @media screen and (max-width: 650px) {
         
     .outer-container{
-        width: 75vi;
-        padding: 25px 25px;
+        width: 80vi;
+        padding: 25px 16px;
     }
     .qr-analytics-container{
         display: flex;
@@ -386,7 +386,7 @@
         line-height: normal;
     }
     .recharts-surface{
-        margin-left: -30px;
+        margin-left: 0px;
     }
     .days-buttons{
         display: flex;
