@@ -16,7 +16,7 @@ const Login = () => {
     //scroll to top
     const location = useLocation();
     useLayoutEffect(() => {
-        document.documentElement.scrollTo({ top:0, left:0, behavior: "instant" });
+        document.documentElement.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }, [location.pathname]);
 
     const handleLogin = async (e) => {
@@ -44,11 +44,10 @@ const Login = () => {
                 if (!response.ok) {
                     const text = await response.text();
                     if (response.status === 401) {
-                        if(text.includes("Account not verified")){
+                        if (text.includes("Account not verified")) {
                             //send verification code
-                            sessionStorage.setItem("email",email);
-                            // toast.error("Email not verified");
-                            try{
+                            sessionStorage.setItem("email", email);
+                            try {
                                 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resend`, {
                                     method: "POST",
                                     headers: {
@@ -59,19 +58,23 @@ const Login = () => {
 
                                 navigate("/verify");
                                 toast.success("Verification code sent to your email");
-                                
-                            } catch(error){
+
+                            } catch (error) {
                                 toast.error("Failed to connect to the server. Please try again later");
                             }
-                            //redirect to verification page
                             navigate("/verify");
-                        }else{
+                        } else {
                             toast.error("Incorrect email or password");
                         }
                     } else if (response.status === 429) {
                         toast.error("Too many requests, please try again later");
                     } else if (response.status === 500) {
-                        toast.error("Something went wrong on the server. Please try again later");
+                        if (text == "Error sending mail") {
+                            toast.error("Account not verified");
+                            toast.error("Failed to send verification mail. Please try again later");
+                        } else {
+                            toast.error("Something went wrong on the server. Please try again later");
+                        }
                     } else {
                         throw new Error("Login failed with status: " + response.status);
                     }
@@ -92,10 +95,11 @@ const Login = () => {
             } catch (error) {
                 if (error.message === "Failed to fetch") {
                     toast.error("Failed to connect to the server. Please try again later");
+                } else{
+                    toast.error("Something went wrong on the server. Please try again later")
                 }
-                // console.error("login failed: ", error);
             } finally {
-                setLoading(false); 
+                setLoading(false);
             }
         }
     }
@@ -105,7 +109,6 @@ const Login = () => {
             <div className="container">
 
                 <Navbar2 />
-
 
                 <form onSubmit={handleLogin} className="auth-container">
                     <div className="auth-heading">Login</div>

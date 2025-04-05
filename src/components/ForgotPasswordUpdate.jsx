@@ -21,7 +21,7 @@ const ForgotPasswordUpdate = () => {
     //scroll to top
     const location = useLocation();
     useLayoutEffect(() => {
-        document.documentElement.scrollTo({ top:0, left:0, behavior: "instant" });
+        document.documentElement.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }, [location.pathname]);
 
     useEffect(() => {
@@ -46,8 +46,11 @@ const ForgotPasswordUpdate = () => {
         if (newPassword == "" || code == "") {
             toast.error("Verification code or password cannot be empty");
         }
-        if(newPassword != reNewPassword){
+        else if (newPassword != reNewPassword) {
             toast.error("Password mismatch");
+        }
+        else if (password.length < 8) {
+            toast.error("Password must be at least 8 characters.")
         }
         else {
             setLoading(true);
@@ -99,6 +102,10 @@ const ForgotPasswordUpdate = () => {
                                     } else if (response.status === 429) {
                                         toast.error("Too many requests, please try again later");
                                     } else if (response.status === 500) {
+                                        if(responseData.includes("Error sending mail")){
+                                            toast.error("Failed to send verification mail. Please try again later");
+                                            navigate("/forgot");
+                                        }
                                         toast.error("Something went wrong on the server. Please try again later");
                                     } else {
                                         throw new Error("Verification failed with status: " + response.status);
@@ -113,6 +120,8 @@ const ForgotPasswordUpdate = () => {
 
                         } else if (responseData.includes("Invalid code")) {
                             toast.error("Invalid code");
+                        } else if(responseData.includes("Error sending mail")){
+                            toast.error("Failed to send verification mail. Please try again later");
                         } else {
                             toast.error("Invalid code or password");
                         }
@@ -142,9 +151,10 @@ const ForgotPasswordUpdate = () => {
                 }
 
             } catch (error) {
+                toast.error("Something went wrong. Please try again later")
                 // console.error("Verification failed");
             } finally {
-                setLoading(false); 
+                setLoading(false);
             }
         }
     }
@@ -168,8 +178,8 @@ const ForgotPasswordUpdate = () => {
         }
     };
 
-    const handleResend = async() => {
-    
+    const handleResend = async () => {
+
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/api/forgot`, {
                 method: "POST",
@@ -222,7 +232,7 @@ const ForgotPasswordUpdate = () => {
                 <form onSubmit={handleForgotPasswordUpdate} className="auth-container">
                     <div className="auth-heading">Verify Email</div>
                     <div className="input-fields">
- 
+
                         <div className="input-field">
                             <div className="input-label"></div>
                             <div className="input-container">

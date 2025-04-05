@@ -28,6 +28,9 @@ const Signup = () => {
         if (email == "" || password == "") {
             toast.error("Email or password cannot be empty");
         }
+        else if(password.length < 8){
+            toast.error("Password must be at least 8 characters.")
+        }
         else {
             setLoading(true);
             try {
@@ -40,8 +43,10 @@ const Signup = () => {
                 });
 
                 if (!response.ok) {
+                    const responseData = await response.text();
                     if (response.status === 500) {
-                        toast.error("Something went wrong on the server. Please try again later");
+                        if(responseData.includes("Error sending mail")) toast.error("Error sending verification mail. Please try again later");
+                        else toast.error("Something went wrong on the server. Please try again later");
                     } else if (response.status === 409) {
                         toast.error("Email already exists \nTry logging in");
                     } else if (response.status === 406) {
@@ -52,12 +57,9 @@ const Signup = () => {
                     throw new Error(`Server error: ${response.status}`);
                 }
 
-                //redirect to /verify
                 sessionStorage.setItem("email",email);
                 toast.success("Verification code sent to your email");
                 navigate("/verify");
-                // toast.success("Account created successfully")
-                // navigate("/login");
 
                 setEmail("");
                 setPassword("");
@@ -66,7 +68,9 @@ const Signup = () => {
                 if (error.message === "Failed to fetch") {
                     toast.error("Failed to connect to the server. Please try again later");
                 }
-                // console.error("signup failed: ", error);
+                else{
+                    toast.error("Something went wrong on the server. Please try again later")
+                }
             } finally {
                 setLoading(false); 
             }

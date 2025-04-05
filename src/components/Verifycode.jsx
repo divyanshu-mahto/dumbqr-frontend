@@ -69,7 +69,11 @@ const Verifycode = () => {
                             //resend and reverify
                         } else if (responseData.includes("Invalid code")) {
                             toast.error("Invalid code");
-                        } else {
+                        } else if(responseData.includes("Error sending mail")){
+                            toast.error("Verification code expired");
+                            toast.error("Failed to send verification email. Please try again later");
+                        }
+                        else {
                             toast.error("Something went wrong on the server. Please try again later");
                         }
                     } else if (response.status === 404) {
@@ -84,8 +88,6 @@ const Verifycode = () => {
                 } else {
 
                     //verification sucessful redirect to dashboard
-                    //generate token
-
                     sessionStorage.setItem("isLogin", response.ok);
                     sessionStorage.setItem("username", responseData.username);
                     Cookies.set("token", responseData.token, { expires: 10 / 1440, secure: true });
@@ -96,7 +98,7 @@ const Verifycode = () => {
                 }
 
             } catch (error) {
-                // console.error("Verification failed");
+                toast.error("Something went wrong on the server. Please try again later");
             } finally {
                 setLoading(false);
             }
@@ -113,8 +115,20 @@ const Verifycode = () => {
                 },
                 body: email
             });
-            toast.success("Verification code resent");
-
+            const responseData = await response.text();
+            if(!response.ok){
+                if(responseData.includes("User already verified")) {
+                    toast.error("User already verified")
+                    navigate("/login");
+                } else if(responseData.includes("User not found")) {
+                    toast.error("User not found");
+                    navigate("/login");
+                } else if(responseData.includes("Error sending mail")){
+                    toast.error("Failed to send verification email. Please try again later");
+                }
+            } else{
+                toast.success("Verification code resent");
+            }
         } catch (error) {
             toast.error("Failed to connect to the server. Please try again later");
         }

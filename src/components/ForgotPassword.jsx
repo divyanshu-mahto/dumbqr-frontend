@@ -53,7 +53,8 @@ const ForgotPassword = () => {
                     } else if (response.status === 429) {
                         toast.error("Too many requests, please try again later");
                     } else if (response.status === 500) {
-                        toast.error("Something went wrong on the server. Please try again later");
+                        if(responseData.includes("Error sending mail")) toast.error("Failed to send verification mail. Please try again later.");
+                        else toast.error("Something went wrong on the server. Please try again later");
                     } else {
                         throw new Error("Verification failed with status: " + response.status);
                     }
@@ -69,7 +70,6 @@ const ForgotPassword = () => {
             } catch (error) {
                 toast.error("Something went wrong. Please try again later")
                 navigate("/forgot");
-                // console.error("Verification failed");
             } finally {
                 setLoading(false); 
             }

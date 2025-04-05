@@ -39,7 +39,7 @@ const NotFoundErrorPage = () => {
                             </div>
                             <Link to={"https://github.com/divyanshu-mahto/dumbqr"} className="github-link">suggest a feature</Link>
                         </div>
-                        <Link to={"mailto:divyanshukm18@gmail.com"} className="contact">contact support</Link>
+                        <Link to={"mailto:support@dumbqr.xyz"} className="contact">contact support</Link>
                     </div>
                 </div>
             </div>
