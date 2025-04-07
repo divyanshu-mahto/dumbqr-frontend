@@ -84,7 +84,7 @@ const Analytics = () => {
     }, [loc.pathname]);
 
     useEffect(() => {
-        const savedIsLogin = sessionStorage.getItem("isLogin");
+        const savedIsLogin = Cookies.get("isLogin");
         const savedToken = Cookies.get("token");
 
         if (!savedIsLogin && !savedToken) {

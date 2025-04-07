@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 
 const Layout = ({ children }) => {
   const [toastPosition, setToastPosition] = useState("top-center");
@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
         containerStyle={{}}
         toastOptions={{
           className: "",
-          duration: 5000,
+          duration: 4000,
           removeDelay: 1000,
           style: {
             background: "#363636",

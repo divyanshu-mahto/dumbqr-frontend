@@ -49,7 +49,7 @@ const ForgotPasswordUpdate = () => {
         else if (newPassword != reNewPassword) {
             toast.error("Password mismatch");
         }
-        else if (password.length < 8) {
+        else if (newPassword.length < 8) {
             toast.error("Password must be at least 8 characters.")
         }
         else {
@@ -115,7 +115,6 @@ const ForgotPasswordUpdate = () => {
                             } catch (error) {
                                 toast.error("Something went wrong. Please try again later")
                                 navigate("/forgot");
-                                // console.error("Verification failed");
                             }
 
                         } else if (responseData.includes("Invalid code")) {
@@ -136,13 +135,9 @@ const ForgotPasswordUpdate = () => {
                     }
                 }
                 else {
-
-                    //verification sucessful , password updated, redirect to dashboard
-                    //generate token
-
-                    sessionStorage.setItem("isLogin", response.ok);
+                    Cookies.set("isLogin", response.ok, { expires: 20 / 1440, secure: true });
                     sessionStorage.setItem("username", responseData.username);
-                    Cookies.set("token", responseData.token, { expires: 10 / 1440, secure: true });
+                    Cookies.set("token", responseData.token, { expires: 20 / 1440, secure: true });
                     sessionStorage.removeItem("email");
 
                     toast.success("Password updated");
@@ -152,7 +147,6 @@ const ForgotPasswordUpdate = () => {
 
             } catch (error) {
                 toast.error("Something went wrong. Please try again later")
-                // console.error("Verification failed");
             } finally {
                 setLoading(false);
             }
@@ -219,7 +213,6 @@ const ForgotPasswordUpdate = () => {
         } catch (error) {
             toast.error("Something went wrong. Please try again later")
             navigate("/forgot");
-            // console.error("Verification failed");
         }
     }
 

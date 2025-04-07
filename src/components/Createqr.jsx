@@ -98,7 +98,7 @@ const Createqr = () => {
 
     const location = useLocation();
     useLayoutEffect(() => {
-        document.documentElement.scrollTo({ top:0, left:0, behavior: "instant" });
+        document.documentElement.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }, [location.pathname]);
 
     const generateQr = useCallback(async (e) => {
@@ -113,7 +113,7 @@ const Createqr = () => {
 
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/qrimage`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/qrimage`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -126,7 +126,7 @@ const Createqr = () => {
                 if (response.status === 401) {
                     toast.error("Session expired");
 
-                    sessionStorage.removeItem("isLogin");
+                    Cookies.remove("isLogin");
                     Cookies.remove("token");
                     sessionStorage.removeItem("username");
                     sessionStorage.removeItem("userQrCodes");
@@ -138,22 +138,24 @@ const Createqr = () => {
                     toast.error("Short URL is already taken. Choose some other short URL");
                 } else if (response.status === 429) {
                     toast.error("Too many requests, please try again later");
+                } else {
+                    toast.error("QR code image generation failed");
                 }
-                throw new Error("QR code image generation failed: " + response.status);
-            }
+            } else {
 
-            const blob = await response.blob();
-            const reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = () => {
-                const base64Data = reader.result.split(',')[1];
-                setQrcode(base64Data);
-            };
+                const blob = await response.blob();
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    const base64Data = reader.result.split(',')[1];
+                    setQrcode(base64Data);
+                };
+            }
 
         } catch (error) {
             navigate("/dashboard");
             toast.error("Error creating QR code, please try again later");
-        } 
+        }
     }, [shortId, foreground, background])
 
 
@@ -166,7 +168,7 @@ const Createqr = () => {
     }, [shortId, foreground, background]);
 
     useEffect(() => {
-        const savedIsLogin = sessionStorage.getItem("isLogin");
+        const savedIsLogin = Cookies.get("isLogin");
         const savedToken = Cookies.get("token");
 
         if (!savedIsLogin && !savedToken) {
@@ -186,7 +188,7 @@ const Createqr = () => {
         if (name == "" || shortId == "" || redirectUrl == "") {
             toast.error("All fields are required");
         }
-        else if (`${import.meta.env.VITE_API_URL}/${shortId}` == redirectUrl){
+        else if (`${import.meta.env.VITE_API_URL}/${shortId}` == redirectUrl) {
             toast.error("Short URL cannot be same as redirect URL");
         }
         else {
@@ -209,7 +211,7 @@ const Createqr = () => {
                     if (response.status === 401) {
                         toast.error("Session expired");
 
-                        sessionStorage.removeItem("isLogin");
+                        Cookies.remove("isLogin");
                         Cookies.remove("token");
                         sessionStorage.removeItem("username");
                         sessionStorage.removeItem("userQrCodes");
@@ -218,23 +220,25 @@ const Createqr = () => {
                     } else if (response.status === 406) {
                         toast.error("Short URL is already taken. Choose some other short URL");
                     } else if (response.status === 400) {
-                        if(responseData == "ShortURL or RedirectURL empty") toast.error("Short URL or Redirect URL cannot be empty");
+                        if (responseData == "ShortURL or RedirectURL empty") toast.error("Short URL or Redirect URL cannot be empty");
                         else toast.error("Short URL contains a reserved keyword \nChoose some other short URL")
                     } else if (response.status === 429) {
                         toast.error("Too many requests, please try again later");
                     } else if (response.status === 500) {
                         toast.error("Something went wrong, please try again later");
+                    } else {
+                        throw new Error("QR code creation failed: " + response.status);
                     }
-                    throw new Error("QR code creation failed: " + response.status);
                 }
-
-                toast.success("QR code created");
-                navigate("/dashboard");
+                else {
+                    toast.success("QR code created");
+                    navigate("/dashboard");
+                }
 
 
             } catch (error) {
                 toast.error("Error creating QR code, please try again later");
-            } finally{
+            } finally {
                 setLoading(false);
             }
         }

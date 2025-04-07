@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react"
+import React, { useState, useLayoutEffect, useEffect } from "react"
 import '../styles/Login.css'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import Navbar2 from "./Navbar2";
@@ -18,6 +18,10 @@ const Login = () => {
     useLayoutEffect(() => {
         document.documentElement.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }, [location.pathname]);
+
+    useEffect(() => {
+        if(Cookies.get("isLogin")) navigate("/dashboard");
+    });
 
     const handleLogin = async (e) => {
 
@@ -82,9 +86,9 @@ const Login = () => {
 
                 const responseData = await response.json()
 
-                sessionStorage.setItem("isLogin", response.ok);
+                Cookies.set("isLogin", response.ok, { expires: 20 / 1440, secure: true });
                 sessionStorage.setItem("username", responseData.username);
-                Cookies.set("token", responseData.token, { expires: 10 / 1440, secure: true });
+                Cookies.set("token", responseData.token, { expires: 20 / 1440, secure: true });
 
                 toast.success(`Welcome ${responseData.username}`)
                 navigate("/dashboard");
@@ -95,7 +99,7 @@ const Login = () => {
             } catch (error) {
                 if (error.message === "Failed to fetch") {
                     toast.error("Failed to connect to the server. Please try again later");
-                }
+                } 
             } finally {
                 setLoading(false);
             }

@@ -11,9 +11,9 @@ const Navbar2 = (props) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    if(sessionStorage.getItem("isLogin")){
+    if(Cookies.get("isLogin")){
 
-        sessionStorage.removeItem("isLogin");
+        Cookies.remove("isLogin");
         Cookies.remove("token");
         sessionStorage.removeItem("username");
         sessionStorage.removeItem("userQrCodes");

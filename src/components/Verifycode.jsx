@@ -88,9 +88,9 @@ const Verifycode = () => {
                 } else {
 
                     //verification sucessful redirect to dashboard
-                    sessionStorage.setItem("isLogin", response.ok);
+                    Cookies.set("isLogin", response.ok, { expires: 20 / 1440, secure: true });
                     sessionStorage.setItem("username", responseData.username);
-                    Cookies.set("token", responseData.token, { expires: 10 / 1440, secure: true });
+                    Cookies.set("token", responseData.token, { expires: 20 / 1440, secure: true });
                     sessionStorage.removeItem("email");
 
                     toast.success(`Welcome ${responseData.username}`)
