@@ -15,7 +15,7 @@ const Navbar2 = (props) => {
 
         Cookies.remove("isLogin");
         Cookies.remove("token");
-        sessionStorage.removeItem("username");
+        Cookies.remove("username");
         sessionStorage.removeItem("userQrCodes");
 
         toast.success("Logged out");

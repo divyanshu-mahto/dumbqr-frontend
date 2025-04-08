@@ -88,7 +88,7 @@ const Editqr = () => {
     //scroll to top
     const location = useLocation();
     useLayoutEffect(() => {
-        document.documentElement.scrollTo({ top:0, left:0, behavior: "instant" });
+        document.documentElement.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }, [location.pathname]);
 
     const handleQrnameChange = useCallback((e) => {
@@ -166,7 +166,7 @@ const Editqr = () => {
 
                         Cookies.remove("isLogin");
                         Cookies.remove("token");
-                        sessionStorage.removeItem("username");
+                        Cookies.get("username");
                         sessionStorage.removeItem("userQrCodes");
 
                         navigate("/login");
@@ -185,7 +185,7 @@ const Editqr = () => {
 
 
             } catch (error) {
-            } finally{
+            } finally {
                 setSaveLoading(false);
             }
         }
@@ -215,7 +215,7 @@ const Editqr = () => {
 
                     Cookies.remove("isLogin");
                     Cookies.remove("token");
-                    sessionStorage.removeItem("username");
+                    Cookies.get("username");
                     sessionStorage.removeItem("userQrCodes");
 
                     navigate("/login");
@@ -227,15 +227,16 @@ const Editqr = () => {
                     toast.error("Too many requests, please try again later");
                 }
                 throw new Error("QR code deletion failed: " + response.status);
-            }
+            } else {
 
-            toast.success("QR code deleted successfully");
-            navigate("/dashboard");
+                toast.success("QR code deleted successfully");
+                navigate("/dashboard");
+            }
 
 
         } catch (error) {
             toast.error("Can't delete QR code, try again later");
-        } finally{
+        } finally {
             setDeleteLoading(false);
         }
     }
@@ -243,7 +244,7 @@ const Editqr = () => {
     const handleDownloadQr = () => {
         const link = document.createElement("a");
         link.href = `data:image/png;base64,${qr.qrcode}`;
-        link.download = `${qr.name || "qr_code"}.png`; //filename
+        link.download = `${qr.name || "dumbqr_code"}.png`; //filename
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -257,7 +258,7 @@ const Editqr = () => {
         <>
             <div className="container">
 
-                <Navbar2 name={sessionStorage.getItem("username")} />
+                <Navbar2 name={Cookies.get("username")} />
 
                 <div className="outer-container-edit">
 

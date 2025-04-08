@@ -128,7 +128,7 @@ const Createqr = () => {
 
                     Cookies.remove("isLogin");
                     Cookies.remove("token");
-                    sessionStorage.removeItem("username");
+                    Cookies.remove("username");
                     sessionStorage.removeItem("userQrCodes");
 
                     navigate("/login")
@@ -213,7 +213,7 @@ const Createqr = () => {
 
                         Cookies.remove("isLogin");
                         Cookies.remove("token");
-                        sessionStorage.removeItem("username");
+                        Cookies.remove("username");
                         sessionStorage.removeItem("userQrCodes");
 
                         navigate("/login")
@@ -271,7 +271,7 @@ const Createqr = () => {
         <>
             <div className="container">
 
-                <Navbar2 name={sessionStorage.getItem("username")} />
+                <Navbar2 name={Cookies.get("username")} />
 
                 <div className="outer-container-edit">
 

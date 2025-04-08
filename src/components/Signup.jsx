@@ -15,7 +15,7 @@ const Signup = () => {
     //scroll to top
     const location = useLocation();
     useLayoutEffect(() => {
-        document.documentElement.scrollTo({ top:0, left:0, behavior: "instant" });
+        document.documentElement.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }, [location.pathname]);
 
     const handleSignup = async (e) => {
@@ -28,7 +28,7 @@ const Signup = () => {
         if (email == "" || password == "") {
             toast.error("Email or password cannot be empty");
         }
-        else if(password.length < 8){
+        else if (password.length < 8) {
             toast.error("Password must be at least 8 characters.")
         }
         else {
@@ -45,7 +45,7 @@ const Signup = () => {
                 if (!response.ok) {
                     const responseData = await response.text();
                     if (response.status === 500) {
-                        if(responseData.includes("Error sending mail")) toast.error("Error sending verification mail. Please try again later");
+                        if (responseData.includes("Error sending mail")) toast.error("Error sending verification mail. Please try again later");
                         else toast.error("Something went wrong on the server. Please try again later");
                     } else if (response.status === 409) {
                         toast.error("Email already exists \nTry logging in");
@@ -53,26 +53,28 @@ const Signup = () => {
                         toast.error("Email or password cannot be empty");
                     } else if (response.status === 429) {
                         toast.error("Too many requests, please try again later");
+                    } else {
+                        throw new Error(`Server error: ${response.status}`);
                     }
-                    throw new Error(`Server error: ${response.status}`);
+                } else {
+
+                    sessionStorage.setItem("email", email);
+                    toast.success("Verification code sent to your email");
+                    navigate("/verify");
+
+                    setEmail("");
+                    setPassword("");
                 }
-
-                sessionStorage.setItem("email",email);
-                toast.success("Verification code sent to your email");
-                navigate("/verify");
-
-                setEmail("");
-                setPassword("");
 
             } catch (error) {
                 if (error.message === "Failed to fetch") {
                     toast.error("Failed to connect to the server. Please try again later");
                 }
-                else{
+                else {
                     toast.error("Something went wrong on the server. Please try again later")
                 }
             } finally {
-                setLoading(false); 
+                setLoading(false);
             }
         }
 

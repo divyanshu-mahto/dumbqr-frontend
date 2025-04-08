@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 
 
-
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,7 +19,7 @@ const Login = () => {
     }, [location.pathname]);
 
     useEffect(() => {
-        if(Cookies.get("isLogin")) navigate("/dashboard");
+        if (Cookies.get("isLogin")) navigate("/dashboard");
     });
 
     const handleLogin = async (e) => {
@@ -82,24 +81,25 @@ const Login = () => {
                     } else {
                         throw new Error("Login failed with status: " + response.status);
                     }
+                } else {
+
+                    const responseData = await response.json()
+
+                    Cookies.set("isLogin", response.ok, { expires: 20 / 1440, secure: true });
+                    Cookies.set("username", responseData.username, { expires: 20 / 1440, secure: true });
+                    Cookies.set("token", responseData.token, { expires: 20 / 1440, secure: true });
+
+                    toast.success(`Welcome ${responseData.username}`)
+                    navigate("/dashboard");
+
+                    setEmail("");
+                    setPassword("");
                 }
-
-                const responseData = await response.json()
-
-                Cookies.set("isLogin", response.ok, { expires: 20 / 1440, secure: true });
-                sessionStorage.setItem("username", responseData.username);
-                Cookies.set("token", responseData.token, { expires: 20 / 1440, secure: true });
-
-                toast.success(`Welcome ${responseData.username}`)
-                navigate("/dashboard");
-
-                setEmail("");
-                setPassword("");
 
             } catch (error) {
                 if (error.message === "Failed to fetch") {
                     toast.error("Failed to connect to the server. Please try again later");
-                } 
+                }
             } finally {
                 setLoading(false);
             }

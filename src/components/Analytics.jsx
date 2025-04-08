@@ -188,7 +188,7 @@ const Analytics = () => {
     return (
         <>
             <div className="container">
-                <Navbar2 name={sessionStorage.getItem("username")} />
+                <Navbar2 name={Cookies.get("username")} />
                 <div className="outer-container">
                     <div className="navigate-back">
                         <div className="back-icon" onClick={() => navigate('/dashboard')}>

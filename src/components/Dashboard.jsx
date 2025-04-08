@@ -48,7 +48,7 @@ const Dashboard = () => {
 
                     Cookies.remove("isLogin");
                     Cookies.remove("token");
-                    sessionStorage.removeItem("username");
+                    Cookies.remove("username");
                     sessionStorage.removeItem("userQrCodes");
 
                     navigate("/login");
@@ -79,6 +79,7 @@ const Dashboard = () => {
             sessionStorage.setItem("userQrCodes", JSON.stringify(userQrCodes));
 
         } catch (error) {
+            toast.error("Too many requests, please try again later");
             // console.error(error);
         } finally {
             setLoading(false);
@@ -133,7 +134,7 @@ const Dashboard = () => {
     return (
         <>
             <div className="dashboard-container">
-                <Navbar2 name={sessionStorage.getItem("username")} />
+                <Navbar2 name={Cookies.get("username")} />
 
                 <div className="qr-codes-outer-container">
                     <div className="heading">
