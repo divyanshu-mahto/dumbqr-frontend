@@ -1,8 +1,47 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Logo](https://i.ibb.co/7NVm152v/logo1.png)
 
-Currently, two official plugins are available:
+# Get smart dynamic QR codes So easy, it feels ‘Dumb’
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Create QR codes that evolve with your needs. Change links anytime, track scans, and never reprint a QR code again.
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/divyanshu-mahto/dumbqr-frontend
+```
+
+Go to the project directory
+
+```bash
+  cd dumbqr-frontend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`VITE_API_URL`
+
+
+
+## Support
+
+For support, email support@dumbqr.xyz 
+
