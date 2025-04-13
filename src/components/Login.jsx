@@ -85,9 +85,9 @@ const Login = () => {
 
                     const responseData = await response.json()
 
-                    Cookies.set("isLogin", response.ok, { expires: 20 / 1440, secure: true });
-                    Cookies.set("username", responseData.username, { expires: 20 / 1440, secure: true });
-                    Cookies.set("token", responseData.token, { expires: 20 / 1440, secure: true });
+                    Cookies.set("isLogin", response.ok, { expires: 15 / 1440, secure: true });
+                    Cookies.set("username", responseData.username, { expires: 15 / 1440, secure: true });
+                    Cookies.set("token", responseData.token, { expires: 15 / 1440, secure: true });
 
                     toast.success(`Welcome ${responseData.username}`)
                     navigate("/dashboard");

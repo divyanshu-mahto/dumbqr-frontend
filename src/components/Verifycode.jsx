@@ -67,6 +67,8 @@ const Verifycode = () => {
                         if (responseData.includes("Code expired")) {
                             toast.error("Verification code expired");
                             //resend and reverify
+                            toast.success("Resent verification code");
+                            setValues((["", "", "", "", "", ""]));
                         } else if (responseData.includes("Invalid code")) {
                             toast.error("Invalid code");
                         } else if(responseData.includes("Error sending mail")){
@@ -88,9 +90,9 @@ const Verifycode = () => {
                 } else {
 
                     //verification sucessful redirect to dashboard
-                    Cookies.set("isLogin", response.ok, { expires: 20 / 1440, secure: true });
-                    Cookies.set("username", responseData.username, { expires: 20 / 1440, secure: true });
-                    Cookies.set("token", responseData.token, { expires: 20 / 1440, secure: true });
+                    Cookies.set("isLogin", response.ok, { expires: 15 / 1440, secure: true });
+                    Cookies.set("username", responseData.username, { expires: 15 / 1440, secure: true });
+                    Cookies.set("token", responseData.token, { expires: 15 / 1440, secure: true });
                     sessionStorage.removeItem("email");
 
                     toast.success(`Welcome ${responseData.username}`)
