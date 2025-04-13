@@ -48,7 +48,7 @@
     gap: 10px;
     border-radius: 10px;
     border: 1px solid #000;
-    background: #fff;
+    background: rgba(153, 229, 96, 0.66);
     box-shadow: 1px 2px 0px 0px #000;
     color: #000;
     text-align: center;
@@ -80,12 +80,20 @@
 }
 .input-2-box{
     appearance: none;
+    -webkit-appearance: none;
     height: 31px;
     flex: 1 0 0;
     border: 1px solid #000;
     padding: 0px;
     background: none;
     border-radius: 6px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0
+}
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
 }
 
 

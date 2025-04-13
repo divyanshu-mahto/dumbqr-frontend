@@ -49,22 +49,8 @@ const Login = () => {
                     if (response.status === 401) {
                         if (text.includes("Account not verified")) {
                             //send verification code
+                            toast.success("Verification code sent to your email");
                             sessionStorage.setItem("email", email);
-                            try {
-                                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resend`, {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    },
-                                    body: email
-                                });
-
-                                navigate("/verify");
-                                toast.success("Verification code sent to your email");
-
-                            } catch (error) {
-                                toast.error("Failed to connect to the server. Please try again later");
-                            }
                             navigate("/verify");
                         } else {
                             toast.error("Incorrect email or password");
