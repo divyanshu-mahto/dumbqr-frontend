@@ -19,7 +19,7 @@ const NotFoundErrorPage = () => {
                 <div className="container-1">
                     <div className="heading-2">Sorry, the page you're looking for cannot be found</div>
                     <Link to={"/"} className="start-button">Go back to Home</Link>
-                    <div className="subheading-1">If you have scanned a QR code and reached here,<br/> the redirect link is invalid or does not exist</div>
+                    <div className="subheading-1">If you have scanned a QR code and reached here, the redirect link is invalid or does not exist</div>
                 </div>
                 
                 <div className="footer">

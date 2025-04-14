@@ -1,8 +1,8 @@
 @font-face {
     font-family: "Basier Square Mono";
     src: url('/fonts/basiersquaremono-regular-webfont.eot') format('eot'),
-        url('/fonts/basiersquaremono-regular-webfont.woff') format('woff2'),
         url('/fonts/basiersquaremono-regular-webfont.woff2') format('woff2'),
+        url('/fonts/basiersquaremono-regular-webfont.woff') format('woff'),
         url('/fonts/basiersquaremono-regular-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
